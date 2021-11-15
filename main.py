@@ -1,7 +1,8 @@
 
 class Agent():
     """
-    Basic implementation of Agent class the constructor gets a list with values, each index of the list represent an item
+    Basic implementation of Agent class.
+    The constructor gets a list with values, each index of the list represent an item
     and the value of this index its how much the agent think this item worth.
     """
 
