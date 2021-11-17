@@ -1,4 +1,3 @@
-
 class Agent():
     """
     Basic implementation of Agent class.
@@ -53,15 +52,21 @@ def is_EF1(agents: list[Agent], bundles: list[list[int]]) -> bool:
     False
     >>> is_EF1([a, b, c], [[], [], [0,1,2,3,4,5,6,7,8]])
     False
+    >>> is_EF1([a, b, c], [ [0,1,2,3], [],[4,5,6,7,8]])
+    False
+    >>> is_EF1([a, b, c], [ [], [],[4]])
+    True
+    >>> is_EF1([a, b], [ [4],[]])
+    True
     """
-    for i in range(len(agents)):
-        for j in range(len(agents)):
-            if len(bundles[i]) == 0 and len(bundles[j]) > 1:
-                return False
+    # for i in range(len(agents)):
+    #     for j in range(len(agents)):
+    #         if len(bundles[i]) == 0 and len(bundles[j]) > 1:
+    #             return False
     for i in range(len(agents)):
         sum = sum_val(bundles[i], agents[i])
         for j in range(len(agents)):
-            if i != j:
+            if i != j and len(bundles[j]) > 0:
                 max_val = max(bundles[j], key=lambda item: agents[i].item_value(item))
                 bundles[j].remove(max_val)
                 j_sum_val = sum_val(bundles[j], agents[i])
@@ -73,6 +78,6 @@ def is_EF1(agents: list[Agent], bundles: list[list[int]]) -> bool:
 
 if __name__ == '__main__':
     import doctest
+
     (failures, tests) = doctest.testmod(report=True)
     print("{} failures, {} tests".format(failures, tests))
-
